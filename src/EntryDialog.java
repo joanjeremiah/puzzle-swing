@@ -28,12 +28,14 @@ class EntryDialog extends JFrame implements ItemListener,ActionListener {
 	static JLabel l;
 	static JComboBox c1;
 	JButton b;
-	JPanel topPanel,bottomPanel;
+//	JPanel topPanel,bottomPanel;
+	JPanel topPanel;
+	JLabel bottomPanel;
 	BufferedImage img;
 	public EntryDialog() throws IOException {
 		f = new JFrame("");
 		BufferedImage img = ImageIO.read(new File("C:\\Users\\JoanJeremiah\\Documents\\Java-projects\\Puzzle\\resources\\photo-1586527155314-1d25428324ff.jpg"));
-		JLabel bottomPanel= new JLabel(new ImageIcon(img));
+		bottomPanel= new JLabel(new ImageIcon(img));
 		JPanel topPanel= new JPanel();
 		topPanel.setPreferredSize(new Dimension(600,50));
 		topPanel.setBackground(new Color(250,127,3));
@@ -81,14 +83,13 @@ class EntryDialog extends JFrame implements ItemListener,ActionListener {
 		}
 	}
 	public void actionPerformed(ActionEvent e){
-		try {
-			f.getContentPane().removeAll();
-			f.add(new PuzzleGame(choice));
-			f.validate();
-		}
-		catch(Exception ex) {
-			
-		}
+		JPanel a = new PuzzleFrame().getPanel(choice);
+		System.out.println(a);
+		f.getContentPane().remove(bottomPanel);
+        f.getContentPane().add(a);
+        f.invalidate();
+        f.validate();
+        f.repaint();
 		
 	}
 	public String getChoice() {
